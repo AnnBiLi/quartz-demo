@@ -30,18 +30,18 @@ public class DetailServiceImpl  extends ServiceImpl<DetailMapper, Detail> implem
     public void add() {
         Detail detail = new Detail();
         detail.setTaskInterval(10);
-        for (int i = 0; i < 10; i++) {
-            detail.setContent("job-"+i);
-        }
         detail.setUsername("wyl");
         detail.setType("job-1");
         detail.setTest("test-job");
-        detailMapper.insert(detail);
-        Task task = new Task();
-        task.setType(detail.getType());
-        task.setCollectorInterval(detail.getTaskInterval());
-        task.setContent(detail.getContent());
-        taskMapper.insert(task);
-        jobScheduleHandler.updateCollectorJob(task);
+        for (int i = 0; i < 10; i++) {
+            detail.setContent("job-"+i);
+            detailMapper.insert(detail);
+            Task task = new Task();
+            task.setType(detail.getType());
+            task.setCollectorInterval(detail.getTaskInterval());
+            task.setContent(detail.getContent());
+            taskMapper.insert(task);
+            jobScheduleHandler.updateCollectorJob(task);
+        }
     }
 }
